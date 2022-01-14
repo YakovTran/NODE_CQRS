@@ -6,6 +6,9 @@ const productsContronller = require('../controllers/products');
 
 const router = express.Router();
 
-router.get('/', productsContronller.getting );
+router.get('/all', productsContronller.getAll );
+router.get('/', productsContronller.getting);
+
+router.get('/:id', productsContronller.getOne);
 
 module.exports = router;
