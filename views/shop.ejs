@@ -6,12 +6,12 @@
     <%- include('include/navigation.ejs') %>
 
     <main>
-        <% if (prods.length > 0) { %>
+       
             <div class="grid">
-                <% for (let product of prods) { %>
+               
                     <article class="card product-item">
                         <header class="card__header">
-                            <h1 class="product__title"><%= product.title %></h1>
+                            <h1 class="product__title">Title</h1>
                         </header>
                         <div class="card__image">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yA5K6CexBpfjlFr1kO5mLSdw06xn9bpmwQ&usqp=CAU"
@@ -25,10 +25,8 @@
                             <button class="btn">Add to Cart</button>
                         </div>
                     </article>
-                <% } %>
+              
             </div>
-        <% } else { %>
-            <h1>No Products Found!</h1>
-        <% } %>
+        
     </main>
 <%- include('include/end.ejs') %>
