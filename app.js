@@ -37,8 +37,9 @@ app.use(adminRoutes);
 app.use(shopRoutes);
 
 app.use(auth(config));
-app.get('/auth', (req, res) => {
+app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  res.render('shop', {path:'shop'});
 });
 
 
