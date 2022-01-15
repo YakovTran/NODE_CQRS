@@ -2,6 +2,17 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+//const {auth} = require('express-openid-connect');
+require('dotenv').config();
+
+/*const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUERBASEURL
+};*/
 
 app.set('view engine','ejs');
 app.set('views', 'views');
@@ -14,6 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(adminRoutes);
 app.use(shopRoutes);
+
+/* app.use(auth(config));
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+}); */
 
 app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
 
