@@ -2,6 +2,16 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
+/*const {initializeApp} = require ('firebase/app');
+const firebaseConfig = {
+  apiKey: "AIzaSyAN5P6icKF74aXHkEwVG8MdDLDnXscmoAE",
+  authDomain: "matchie-cce12.firebaseapp.com",
+  projectId : "matchie-cce12"
+}; */
+
+//const firebaseInit = initializeApp(firebaseConfig);
+
 //const {auth} = require('express-openid-connect');
 require('dotenv').config();
 
@@ -31,15 +41,19 @@ app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 }); */
 
-app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
 
+/*app.get('/', (req, res, next) => {
+  firebaseInit.auth().getRedirectResult();
+});*/
+
+app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
 /*const mongoConnect = require('./database');
 mongoConnect();*/
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://yakovtran:code0101001@cluster0.iwtie.mongodb.net/demo?retryWrites=true'
 ).then ( result => {
-    app.listen(3000);})
+    app.listen(process.env.PORT);})
 .catch(err => {
     console.log(err);
 });
