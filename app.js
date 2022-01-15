@@ -53,7 +53,7 @@ mongoConnect();*/
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://yakovtran:code0101001@cluster0.iwtie.mongodb.net/demo?retryWrites=true'
 ).then ( result => {
-    app.listen(process.env.PORT);})
+    app.listen(process.env.PORT||3000);})
 .catch(err => {
     console.log(err);
 });
