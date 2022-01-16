@@ -7,8 +7,8 @@ const productsContronller = require('../controllers/products');
 const router = express.Router();
 
 router.get('/all', productsContronller.getAll );
-//router.get('/', productsContronller.getting);
+router.get('/', productsContronller.getting);
 
-router.get('/:id', productsContronller.getOne);
+router.get('/book/:id', productsContronller.getOne);
 
 module.exports = router;
