@@ -30,12 +30,11 @@ app.use(auth(config));
 
 const UrlScheme = require('url-scheme') ;
 
-app.get('/app', (req, res) => {
+app.get('/app', () => {
   
   new UrlScheme({ url: 'sapappgyver://' })
-  .then(res => console.log(res))
+  .then(res => res.send(res))
   .catch(err => console.error(err))
-  res.end(); 
 
 })
 
