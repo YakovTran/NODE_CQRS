@@ -2,18 +2,20 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-
-/*const {initializeApp} = require ('firebase/app');
-const firebaseConfig = {
-  apiKey: "AIzaSyAN5P6icKF74aXHkEwVG8MdDLDnXscmoAE",
-  authDomain: "matchie-cce12.firebaseapp.com",
-  projectId : "matchie-cce12"
-}; */
-
-//const firebaseInit = initializeApp(firebaseConfig);
-
-const {auth} = require('express-openid-connect');
+const {auth, requiresAuth} = require('express-openid-connect');
 require('dotenv').config();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine','ejs');
+app.set('views', 'views');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(adminRoutes);
+app.use(shopRoutes);
 
 const config = {
   authRequired: false,
@@ -24,31 +26,11 @@ const config = {
   issuerBaseURL: process.env.ISSUERBASEURL
 };
 
-app.set('view engine','ejs');
-app.set('views', 'views');
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(adminRoutes);
-app.use(shopRoutes);
-
 app.use(auth(config));
-app.get('/auth', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
 
-
-/*app.get('/', (req, res, next) => {
-  firebaseInit.auth().getRedirectResult();
-});*/
-
-app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
-/*const mongoConnect = require('./database');
-mongoConnect();*/
+app.get('/app', (req, res) => {
+  res.redirect('sapappgyver');
+})
 
 const mongoose = require('mongoose');
 const { Http2ServerRequest } = require('http2');
@@ -58,3 +40,36 @@ mongoose.connect('mongodb+srv://yakovtran:code0101001@cluster0.iwtie.mongodb.net
 .catch(err => {
     console.log(err);
 });
+
+const userModel = require('./models/user');
+
+app.get('/auth', (req, res)=>{
+    res.send (req.oidc.isAuthenticated() ? 'Logged in' : 'Loggout');
+});
+
+app.get('/', async (req, res) => {
+
+  res.render('shop', {path:'shop'});
+ 
+  if (req.oidc.isAuthenticated() == true ) 
+  {     
+      const user = new userModel ({
+            name : req.oidc.user.nickname,
+            email : req.oidc.user.email,
+            imageUrl : req.oidc.user.picture,
+            authID : req.oidc.user.sub
+});
+    const authCheck = userModel.findOne({authID : req.oidc.user.sub});
+      
+      if ( authCheck === null) {
+        try { await user.save();}
+        catch (err) {console.log(err);}
+      }
+  };
+
+});
+
+app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
+/*const mongoConnect = require('./database');
+mongoConnect();*/
+

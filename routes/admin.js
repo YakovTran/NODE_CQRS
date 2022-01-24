@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 
-const producsContronller = require('../controllers/products');
+const producsContronller = require('../controllers/handler');
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/add', producsContronller.input);
 
 // /admin/add-product => POST
-router.post('/add', producsContronller.adding );
+router.post('/add', producsContronller.addBook );
 
 router.delete('/:id', producsContronller.delete);
 

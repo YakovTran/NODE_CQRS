@@ -1,11 +1,11 @@
-const res = require('express/lib/response');
-const bookModel = require('../models/book');
+const express = require('express');
 const { post } = require('../routes/admin');
+const bookModel = require('../models/book');
 
 exports.input = (req, res, next) => 
 res.render('add', {path:'add'});
 
-exports.adding = async (req, res ) => {
+exports.addBook = async (req, res ) => {
     const book = new bookModel({
         title : req.body.title,
         price : 10,
@@ -17,7 +17,7 @@ exports.adding = async (req, res ) => {
         res.json(addedBook);
         //res.redirect('/');
     }
-    catch (err) { res.write(err);}
+    catch (err) { res.json({message : err});}
 };
 
 exports.getAll = async (req, res, next) => {
@@ -30,9 +30,9 @@ exports.getAll = async (req, res, next) => {
     }
 }
 
-exports.getting = (req, res, next ) => {
-    res.render('shop', {path:'shop'});
-}
+//exports.getting = (req, res, next ) => {
+    //res.render('shop', {path:'shop'});
+//}
 
 exports.getOne = async (req, res, next) => {
     try {
