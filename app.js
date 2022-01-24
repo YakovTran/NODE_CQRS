@@ -35,6 +35,8 @@ app.get('/app', (req, res) => {
   new UrlScheme({ url: 'sapappgyver://' })
   .then(res => console.log(res))
   .catch(err => console.error(err))
+  res.end(); 
+
 })
 
 const mongoose = require('mongoose');
