@@ -30,7 +30,7 @@ app.use(auth(config));
 
 app.get('/app', (req, res) => {
   
-  window.location = "sapappgyver";
+  window.location = "sapappgyver://";
 })
 
 const mongoose = require('mongoose');
