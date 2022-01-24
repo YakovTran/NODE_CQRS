@@ -28,9 +28,12 @@ const config = {
 
 app.use(auth(config));
 
+import { Android, Ios } from 'uri-scheme';
+
 app.get('/app', (req, res) => {
   
-  window.location = "sapappgyver://";
+  Android.openAsync ({uri: 'sapappgyver://'});
+  res.end();
 })
 
 const mongoose = require('mongoose');
