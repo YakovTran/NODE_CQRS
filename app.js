@@ -29,7 +29,8 @@ const config = {
 app.use(auth(config));
 
 app.get('/app', (req, res) => {
-  res.redirect('sapappgyver');
+  
+  window.location = "sapappgyver";
 })
 
 const mongoose = require('mongoose');
