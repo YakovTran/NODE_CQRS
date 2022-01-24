@@ -28,15 +28,32 @@ const config = {
 
 app.use(auth(config));
 
+
+
 const UrlScheme = require('url-scheme') ;
 
-app.get('/app', () => {
+app.get('/openapp1', (req, res) => {
   
-  new UrlScheme({ url: 'sapappgyver://' })
-  .then(res => res.send(res))
+  const app1 = new UrlScheme({ url: 'sapappgyver://' })
+  .then(res => console.log(res))
   .catch(err => console.error(err))
 
+  res.send(app1);
+  
 })
+
+
+const Android = require('uri-scheme');
+
+app.get('/openapp2', (req, res) => {
+
+    const app2 = Android.openAsync({ uri: 'sapappgyver' });
+
+    res.send(app2);
+})
+
+
+
 
 const mongoose = require('mongoose');
 const { Http2ServerRequest } = require('http2');
