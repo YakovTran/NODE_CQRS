@@ -28,12 +28,13 @@ const config = {
 
 app.use(auth(config));
 
-const { Android, Ios } = require('uri-scheme') ;
+const UrlScheme = require('url-scheme') ;
 
 app.get('/app', (req, res) => {
   
-  Android.openAsync ({uri: 'sapappgyver://'});
-  res.end();
+  new UrlScheme({ url: 'sapappgyver://' })
+  .then(res => console.log(res))
+  .catch(err => console.error(err))
 })
 
 const mongoose = require('mongoose');
