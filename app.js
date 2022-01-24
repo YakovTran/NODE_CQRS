@@ -28,7 +28,7 @@ const config = {
 
 app.use(auth(config));
 
-import { Android, Ios } from 'uri-scheme';
+const { Android, Ios } = require('uri-scheme') ;
 
 app.get('/app', (req, res) => {
   
