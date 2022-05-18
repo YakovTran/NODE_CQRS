@@ -67,6 +67,7 @@ const userModel = require('./models/user');
 
 app.get('/auth', (req, res)=>{
     res.send (req.oidc.isAuthenticated() ? 'Logged in' : 'Loggout');
+    res.send(req.oidc.user.nickname);
 });
 
 app.get('/', async (req, res) => {
