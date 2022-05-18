@@ -2,18 +2,18 @@ const path = require('path');
 
 const express = require('express');
 
-const producsContronller = require('../controllers/handler');
+const productsContronller = require('../controllers/handler');
 
 const router = express.Router();
 
 // /admin/add-product => GET
-router.get('/add', producsContronller.input);
+router.get('/add', productsContronller.input);
 
 // /admin/add-product => POST
-router.post('/add', producsContronller.addBook );
+router.post('/add', productsContronller.addBook );
 
-router.delete('/:id', producsContronller.delete);
+router.delete('/:id', productsContronller.delete);
 
-router.patch('/:id', producsContronller.update);
+router.patch('/:id', productsContronller.update);
 
 module.exports = router;
