@@ -29,11 +29,11 @@ const config = {
 app.use(auth(config));
 
 app.get ('/openapp', (req,res)=>{
-  res.type(".js");
-  res.send("window.location.replace('sapappgyver://')")
+  res.sendFile('open.html');
 })
 app.get ('/openapp2', (req,res)=>{
-  res.location('sapappyger://')
+  res.location('sapappyger://');
+  res.end();
 })
 
 /*const UrlScheme = require('url-scheme') ;
