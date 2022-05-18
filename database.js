@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 
 const mongoConnect = () => {
-    MongoClient.connect('mongodb+srv://yakovtran:code0101001@cluster0.iwtie.mongodb.net/nodemo?retryWrites=true'
+    MongoClient.connect('mongodb+srv://yakovtran:code0101001@cluster0.iwtie.mongodb.net/demo?retryWrites=true'
     ).then (client => {
         console.log('MongoDB Connected !');
     }).catch (err => {
