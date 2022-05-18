@@ -30,28 +30,27 @@ app.use(auth(config));
 
 
 
-const UrlScheme = require('url-scheme') ;
+/*const UrlScheme = require('url-scheme') ;
 
-app.get('/openapp1', (req, res) => {
+app.get('/openappurl', (req, res) => {
   
-  const app1 = new UrlScheme({ url: 'sapappgyver://' })
+  new UrlScheme({ url: 'sapappgyver://' })
   .then(res => console.log(res))
   .catch(err => console.error(err))
-
-  res.send(app1);
   
+  res.end();
 })
 
 
 const Android = require('uri-scheme');
 
-app.get('/openapp2', (req, res) => {
+app.get('/openappuri', (req, res) => {
 
-    const app2 = Android.openAsync({ uri: 'sapappgyver' });
+    Android.openAsync({ uri: 'sapappgyver://' });
 
-    res.send(app2);
+    res.end();
 })
-
+*/
 
 
 
