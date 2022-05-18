@@ -29,7 +29,7 @@ const config = {
 app.use(auth(config));
 
 app.get ('/openapp', (req,res)=>{
-  res.sendFile('open.html');
+  res.sendFile(path.join(__dirname, 'open.html'));
 })
 app.get ('/openapp2', (req,res)=>{
   res.location('sapappyger://');
