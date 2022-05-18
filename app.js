@@ -28,7 +28,10 @@ const config = {
 
 app.use(auth(config));
 
-
+app.get ('/openapp', (req,res)=>{
+  window.location.replace('sapappgyver://')
+  res.end()
+})
 
 /*const UrlScheme = require('url-scheme') ;
 
@@ -67,7 +70,6 @@ const userModel = require('./models/user');
 
 app.get('/auth', (req, res)=>{
     res.send (req.oidc.isAuthenticated() ? 'Logged in' : 'Loggout');
-    res.send(req.oidc.user.nickname);
 });
 
 app.get('/', async (req, res) => {
