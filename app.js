@@ -31,6 +31,9 @@ app.use(auth(config));
 app.get ('/openapp', (req,res)=>{
   res.sendFile(path.join(__dirname, 'open.html'));
 })
+app.get ('/openapp2', (req,res)=>{
+  res.sendFile(path.join(__dirname, 'open2.html'));
+})
 
 
 
