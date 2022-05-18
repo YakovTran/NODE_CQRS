@@ -31,10 +31,8 @@ app.use(auth(config));
 app.get ('/openapp', (req,res)=>{
   res.sendFile(path.join(__dirname, 'open.html'));
 })
-app.get ('/openapp2', (req,res)=>{
-  res.location('sapappyger://');
-  res.end();
-})
+
+
 
 /*const UrlScheme = require('url-scheme') ;
 
@@ -76,7 +74,7 @@ app.get('/auth', (req, res)=>{
 });
 
 app.get('/', async (req, res) => {
-
+  
   res.render('shop', {path:'shop'});
  
   if (req.oidc.isAuthenticated() == true ) 
