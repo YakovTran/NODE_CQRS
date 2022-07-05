@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const {auth, requiresAuth} = require('express-openid-connect');
+const axios = require("axios").default
 require('dotenv').config();
 
 app.use(bodyParser.json());
@@ -31,34 +32,6 @@ app.use(auth(config));
 app.get ('/openapp', (req,res)=>{
   res.sendFile(path.join(__dirname, 'open.html'));
 })
-app.get ('/openapp2', (req,res)=>{
-  res.sendFile(path.join(__dirname, 'open2.html'));
-})
-
-
-
-/*const UrlScheme = require('url-scheme') ;
-
-app.get('/openappurl', (req, res) => {
-  
-  new UrlScheme({ url: 'sapappgyver://' })
-  .then(res => console.log(res))
-  .catch(err => console.error(err))
-  
-  res.end();
-})
-
-
-const Android = require('uri-scheme');
-
-app.get('/openappuri', (req, res) => {
-
-    Android.openAsync({ uri: 'sapappgyver://' });
-
-    res.end();
-})
-*/
-
 
 
 const mongoose = require('mongoose');
@@ -76,12 +49,15 @@ app.get('/auth', (req, res)=>{
     res.send (req.oidc.isAuthenticated() ? 'Logged in' : 'Loggout');
 });
 
+var userID = ''
+
 app.get('/', async (req, res) => {
   
   res.render('shop', {path:'shop'});
  
   if (req.oidc.isAuthenticated() == true ) 
-  {     
+  {   
+      userID = req.oidc.user.sub
       const user = new userModel ({
             name : req.oidc.user.nickname,
             email : req.oidc.user.email,
@@ -97,6 +73,55 @@ app.get('/', async (req, res) => {
   };
 
 });
+
+var token =''
+var getToken = {
+    method: 'POST',
+    url: 'https://nodemo.us.auth0.com/oauth/token',
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    data: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: 'ZKuduvtPck6nVar5fa2BVaAs3AqFE2rB',
+      client_secret: 'qFva4cM7_9iUC193WrOPeSDljVTorI91NZQDTBaTeEok8_1h8p2KzmU9-jYcipH8',
+      audience: 'https://nodemo.us.auth0.com/api/v2/'
+    })
+};
+
+axios.request(getToken).then((response)=> {
+  token = response.data.access_token
+}).catch(err => {
+  console.log(err);
+});
+
+app.get('/user', (req,res)=> {
+  userID = req.oidc.user.sub
+  var getCurrentUser = {
+    method: 'GET',
+    url: `https://nodemo.us.auth0.com/api/v2/users/${userID}`,
+    headers: {'content-type': 'application/json', authorization: `Bearer ${token}`},
+    };
+
+  axios.request(getCurrentUser).then((response) =>{
+      res.json(response.data)
+    }).catch((err) =>{
+      console.log(err);
+    });
+})
+
+app.get('/users', (req,res)=> {
+  var getUsers = {
+    method: 'GET',
+    url: 'https://nodemo.us.auth0.com/api/v2/users',
+    headers: {'content-type': 'application/json', authorization: `Bearer ${token}`},
+    };
+
+  axios.request(getUsers).then((response) =>{
+      res.json(response.data)
+    }).catch((err) =>{
+      console.log(err);
+    });
+})
+
 
 app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
 /*const mongoConnect = require('./database');
