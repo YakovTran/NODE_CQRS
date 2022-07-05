@@ -1,5 +1,4 @@
-const express = require('express');
-const { post } = require('../routes/admin');
+
 const bookModel = require('../models/book');
 
 exports.input = (req, res) => 
