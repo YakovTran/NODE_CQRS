@@ -12,13 +12,12 @@ app.set('views', 'views');
 const commandRoute = require('./Product/Routes/commandRoute');
 const queryRoute = require('./Product/Routes/queryRoute');
 
-app.use(commandRoute);
-app.use(queryRoute);
+app.use(commandRoute)
+app.use(queryRoute)
 
+app.get('/', (req, res) => {
+  res.render('add', {path:'add'}) })
 
 app.listen(3000)
 
-app.use((req,res,next)=>res.status(404).send('Page not found/Error'));
-/*const mongoConnect = require('./database');
-mongoConnect();*/
-
+app.use((req,res,next)=>res.status(404).send('Page not found/Error'))
