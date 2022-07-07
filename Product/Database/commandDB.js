@@ -1,2 +1,3 @@
-var commandDB = [{"name": "demo", "price": 123, "quantity": 10}]
-exports.default = commandDB
+var commandDB = [{"name": "demo", "price": "123"}]
+
+module.exports = commandDB

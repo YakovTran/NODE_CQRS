@@ -1,5 +1,10 @@
-var productDB = require('../Database/queryDB')
+var products = require('../Database/queryDB')
 
 exports.getAll = (req,res) => {
-    res.send(productDB)
+    res.json({data: products})
+}
+
+exports.getOne = (req,res)=>{
+    let i = req.params.id
+    res.json(products[i])
 }
