@@ -12,3 +12,4 @@ app.use(commandRoute)
 app.use(queryRoute)
 
 app.listen(3000)
+

@@ -1,10 +1,12 @@
-var products = require('../Database/queryDB')
+var Projector = require('../Handler/commandHandler')
 
 exports.getAll = (req,res) => {
-    res.json({data: products})
+    const result = Array.from(Projector.Projector.productDB.values())
+    console.log(result)
+    res.send(result)
 }
 
 exports.getOne = (req,res)=>{
     let i = req.params.id
-    res.json(products[i])
+    res.json(products.productDB)
 }

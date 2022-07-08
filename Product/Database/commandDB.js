@@ -1,3 +1,3 @@
-var commandDB = [{"name": "demo", "price": "123"}]
+var commandDB = []
 
 module.exports = commandDB
