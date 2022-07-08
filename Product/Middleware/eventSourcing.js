@@ -3,7 +3,7 @@ var eventDB = require('../Database/eventDB')
 exports.addProductEvent = (req,res,next) => {
     let event = {
             method: req.method,
-            date: new Date(),
+            time: new Date(),
             name: req.body.name,
             price: req.body.price,
             quantity: req.body.quantity
@@ -16,21 +16,20 @@ exports.addProductEvent = (req,res,next) => {
 exports.updateProductEvent = (req, res, next) => {
     let event = {
         method: req.method,
-        date: new Date(),
+        time: new Date(),
         productID : req.params.id,
         name: req.body.name,
         price: req.body.price,
         quantity: req.body.quantity
     }
     eventDB.push(event)
-    console.log(eventDB)
     next()
 }
 
 exports.deleteProductEvent = (req, res, next) => {
     let event ={
         method: req.method,
-        date: new Date(),
+        time: new Date(),
         IDRemoved: req.params.id
     }
     eventDB.push(event)

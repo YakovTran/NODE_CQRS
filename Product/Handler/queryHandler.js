@@ -1,4 +1,5 @@
 var Projector = require('../Handler/commandHandler')
+var eventDB = require('../Database/eventDB')
 
 exports.getAll = (req,res) => {
     const result = Array.from(Projector.Projector.productDB.values())
@@ -12,4 +13,3 @@ exports.getOne = (req,res)=>{
     const result = temp.i
     res.send(result)
 } ///// not working yet..
-
