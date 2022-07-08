@@ -6,9 +6,7 @@ var Projector = new queryDB
 exports.addProduct = ( req,res)=>{
         products.push(req.body)
         products[products.length - 1].id = products.length - 1
-        /*Projector.addProduct(products[products.length-1])
-        var eventStore = eventSource.addProductEvent(req.body.name, req.body.price, req.body.quantity)
-        eventSourceDB.push(eventStore)*/
+        Projector.addProduct(products[products.length-1])
         res.json({mes: "Product added", data : products})
 }
 
@@ -24,5 +22,3 @@ exports.deleteProduct = (req,res) => {
         products.splice(i,1)
         res.json({mes: "Product deleted", data: products})
 }
-
-exports.Projector = Projector
