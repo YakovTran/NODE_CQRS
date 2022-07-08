@@ -3,7 +3,7 @@ const queryDB = require('../Database/queryDB')
 
 var Projector = new queryDB
 
-exports.addProduct = ( req,res)=>{
+exports.addProduct = (req,res)=>{
         products.push(req.body)
         products[products.length - 1].id = products.length - 1
         Projector.addProduct(products[products.length-1])
@@ -22,3 +22,5 @@ exports.deleteProduct = (req,res) => {
         products.splice(i,1)
         res.json({mes: "Product deleted", data: products})
 }
+
+exports.Projector = Projector
