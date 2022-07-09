@@ -23,4 +23,4 @@ exports.deleteProduct = (req,res) => {
         res.json({mes: "Product deleted", data: products})
 }
 
-exports.Projector = Projector
+exports.ProjectorDB = Projector
