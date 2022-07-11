@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const eventHandler = require('./eventHandler')
 const commandHandler = require('../Product/Handler/commandHandler')
-const Validator = require('../Product/Middleware/validator')
+const validatorByID = require('../Product/Middleware/validatorByID')
+const validatorByName = require('../Product/Middleware/validatorByName')
 
 router.get('/events', eventHandler.getEvents)
-router.get('/event:id', eventHandler.playEvent)
+router.post('/replayEvent:id', eventHandler.playEvent)
 
-router.post('/eventReplay',Validator.byName,commandHandler.addProduct)
-router.patch('/eventReplay:id',Validator.byIndex,commandHandler.updateProduct)
-router.delete('/eventReplay:id',Validator.byIndex,commandHandler.deleteProduct)
+router.post('/eventReplay',validatorByName,commandHandler.addProduct)
+router.patch('/eventReplay:id',validatorByID,commandHandler.updateProduct)
+router.delete('/eventReplay:id',validatorByID,commandHandler.deleteProduct)
 
 module.exports = router

@@ -10,10 +10,9 @@ exports.eventValidator = (req,res,next) => {
 }
 
 exports.addProductEvent = (req,res,next) => {
-    let event = {
+    const event = {
             method: req.method,
             time: new Date(),
-            params : req.params.id,
             data : req.body
         }
     eventDB.push(event)
@@ -21,7 +20,7 @@ exports.addProductEvent = (req,res,next) => {
 }
 
 exports.updateProductEvent = (req, res, next) => {
-    let event = {
+    const event = {
         method: req.method,
         time: new Date(),
         params : req.params.id,
@@ -32,7 +31,7 @@ exports.updateProductEvent = (req, res, next) => {
 }
 
 exports.deleteProductEvent = (req, res, next) => {
-    let event ={
+    const event ={
         method: req.method,
         time: new Date(),
         productID: req.params.id
