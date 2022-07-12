@@ -10,8 +10,4 @@ router.post('/product',eventSourcing.addProductEvent, validatorByName, commandHa
 router.patch('/product:id', eventSourcing.updateProductEvent, validatorByID, commandHandler.updateProduct)
 router.delete('/product:id', eventSourcing.deleteProductEvent, validatorByID, commandHandler.deleteProduct)
 
-router.get('/test', (req, res)=>{
-    res.sendStatus(200)
-})
-
 module.exports = router;
