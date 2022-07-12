@@ -8,7 +8,7 @@ class commandDemoQueryDB extends commandHandler {
     addProduct = (req,res)=>{
             products.push(req.body)
             products[products.length - 1].id = products.length - 1
-            this.ProjectorDB.addProduct(products[products.length-1])
+            this.ProjectorDB.insertProduct(products[products.length-1])
             res.json({mes: "Product added", data : products})
     }
 

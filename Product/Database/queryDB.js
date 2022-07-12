@@ -3,7 +3,7 @@ class demoQueryDB {
     nameDB = new Map()
     priceDB = new Map()
     quantityDB = new Map ()
-    addProduct(product){
+    insertProduct(product){
         this.productDB.set(product.id, product)
         this.nameDB.set(product.id, product.name)
         this.priceDB.set(product.id, product.price)
