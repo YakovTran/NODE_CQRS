@@ -10,15 +10,24 @@ exports.getEvents = (req,res)=> {
 exports.playEvent = async (req,res) => {
     products.length = 0
     let requests = []
-    let id = req.params.id
+    const id = req.params.id
     for(i =0; i <= id; i++){
+        if(events[i].method == "POST"){
             requests.push(
                 axios.request({
                 method: events[i].method,
                 url: 'http://localhost:3000/eventReplay',
-                data : events[i].data,
-                params : events[i].params
+                data : events[i].data
             }))
+        } else {
+            requests.push(
+                axios.request({
+                method: events[i].method,
+                url: 'http://localhost:3000/eventReplay:id',
+                data : events[i].data,
+                params : {id: events[i].params}
+            }))
+        }   
     }
     try { await Promise.all(requests)
         res.send(products)

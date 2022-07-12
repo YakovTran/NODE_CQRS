@@ -6,7 +6,7 @@ exports.getAll = (req,res) => {
 }
 
 exports.getOne = (req,res)=>{
-    let i = req.params.id
+    const i = req.params.id
     const convert = Array.from(Projector.ProjectorDB.productDB.values())
     const result = convert.find(product => product.id == i)
     res.send(result)

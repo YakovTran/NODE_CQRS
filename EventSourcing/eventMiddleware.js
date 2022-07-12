@@ -1,7 +1,7 @@
 var eventDB = require('./eventDB')
 
 exports.eventValidator = (req,res,next) => {
-    let i = req.params.id
+    const i = req.params.id
     if(0 <= i <= eventDB.length - 1){
         next()
     } else {
@@ -34,7 +34,7 @@ exports.deleteProductEvent = (req, res, next) => {
     const event ={
         method: req.method,
         time: new Date(),
-        productID: req.params.id
+        params: req.params.id
     }
     eventDB.push(event)
     next()

@@ -11,7 +11,7 @@ exports.addProduct = (req,res)=>{
 }
 
 exports.updateProduct = (req, res) => {
-    let i = parseInt(req.params.id)
+    const i = parseInt(req.params.id)
     products[i].name = req.body.name
     products[i].price = req.body.price
     products[i].quantity = req.body.quantity
