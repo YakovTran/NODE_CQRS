@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const commandHandler = require('../Handler/commandHandler')
+const commandHandler = require('../Handler/commandDemoQueryDBInjector')
 const validatorByID = require('../Middleware/validatorByID')
 const validatorByName = require('../Middleware/validatorByName')
 const eventSourcing = require('../../EventSourcing/eventMiddleware')

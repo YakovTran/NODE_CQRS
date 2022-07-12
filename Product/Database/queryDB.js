@@ -1,4 +1,4 @@
-class queryDB {
+class demoQueryDB {
     productDB = new Map()
     nameDB = new Map()
     priceDB = new Map()
@@ -11,4 +11,4 @@ class queryDB {
     }
 }
 
-module.exports = queryDB
+module.exports = demoQueryDB
