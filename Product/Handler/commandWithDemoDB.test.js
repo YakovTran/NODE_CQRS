@@ -2,8 +2,13 @@
 const supertest = require('supertest')
 const app = require('../../app')
 const request = supertest(app)
+const commandWithDemoDBInjector = require('./commandWithDemoDBInjector')
+const demoQueryDB = require('../Database/queryDB')
+jest.mock('../Database/queryDB')
 
-
+beforeEach(()=> {
+    demoQueryDB.mockClear()
+})
 
 describe ('POST / product', ()=> {
     describe('given body request', ()=> {
@@ -38,6 +43,11 @@ describe ('POST / product', ()=> {
                 price : 10
             })
             expect(response.body.data[0].id).toBeDefined()
+        })
+        it('mock queryDB', ()=>{
+            injector = new commandWithDemoDBInjector
+            injector.getCommandHandler()
+            expect(demoQueryDB).toHaveBeenCalledTimes(1)
         })
     })
 })
