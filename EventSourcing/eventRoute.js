@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const eventHandler = require('./eventHandler')
-const commandHandler = require('../Product/Handler/commandWithDemoDBInjector')
+const commandWithDemoDB = require('../Product/Handler/commandWithDemoDBInjector')
 const validatorByID = require('../Product/Middleware/validatorByID')
 const validatorByName = require('../Product/Middleware/validatorByName')
 
+const injector = new commandWithDemoDB
+commandHandler = injector.getCommandHandler()
 
 router.get('/events', eventHandler.getEvents)
 router.post('/replayEvent:id', eventHandler.playEvent)
