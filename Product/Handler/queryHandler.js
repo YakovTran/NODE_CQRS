@@ -1,5 +1,4 @@
-const commandWithDemoDB = require('../Handler/commandWithDemoDBInjector')
-const injector = new commandWithDemoDB
+const injector = require('../Handler/commandWithDemoDBInjector')
 commandHandler = injector.getCommandHandler()
 
 exports.getAll = (req,res) => {
