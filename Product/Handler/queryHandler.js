@@ -1,5 +1,8 @@
-const injector = require('../Handler/commandWithDemoDBInjector')
-commandHandler = injector.getCommandHandler()
+const commandWithDemoDBInjector = require('../Handler/commandWithDemoDBInjector')
+const demoQueryDB = require('../Database/queryDB')
+
+injector = new commandWithDemoDBInjector(demoQueryDB)
+const commandHandler = injector.getCommandHandler()
 
 exports.getAll = (req,res) => {
     const result = Array.from(commandHandler.ProjectorDB.productDB.values())

@@ -1,12 +1,13 @@
-
 const express = require('express');
 const router = express.Router();
-const injector = require('../Handler/commandWithDemoDBInjector')
+const commandWithDemoDBInjector = require('../Handler/commandWithDemoDBInjector')
 const validatorByID = require('../Middleware/validatorByID')
 const validatorByName = require('../Middleware/validatorByName')
-const eventSourcing = require('../../EventSourcing/eventMiddleware');
+const eventSourcing = require('../../EventSourcing/eventMiddleware')
+const demoQueryDB = require('../Database/queryDB')
 
-commandHandler = injector.getCommandHandler()
+injector = new commandWithDemoDBInjector(demoQueryDB)
+const commandHandler = injector.getCommandHandler()
 
 router.post('/product',eventSourcing.addProductEvent, validatorByName, commandHandler.addProduct)
 router.patch('/product:id', eventSourcing.updateProductEvent, validatorByID, commandHandler.updateProduct)

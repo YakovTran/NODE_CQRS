@@ -11,4 +11,6 @@ class demoQueryDB {
     }
 }
 
-module.exports = demoQueryDB
+var db = new demoQueryDB
+
+module.exports = db
