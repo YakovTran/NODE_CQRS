@@ -3,7 +3,6 @@ const commandHandler = require('./commandHandler')
 var products = require('../Database/commandDB')
 
 class commandDemoQueryDB extends commandHandler {
-    ProjectorDB = new demoQueryDB
   
     addProduct = (req,res)=>{
             products.push(req.body)
@@ -26,6 +25,6 @@ class commandDemoQueryDB extends commandHandler {
     }
 }
 
-const commandDemoQueryDBInjector = new commandDemoQueryDB
+const commandDemoQueryDBInjector = new commandDemoQueryDB (new demoQueryDB)
 
 module.exports = commandDemoQueryDBInjector
