@@ -1,4 +1,4 @@
-const commanHandler = require('./commandHandler')
+const commanHandler = require('./commandAbstract')
 //import {jest} from '@jest/globals'
 const supertest = require('supertest')
 const app = require('../../app')

@@ -1,8 +1,8 @@
-const demoQueryDB = require('../Database/queryDB')
-const commandHandler = require('./commandHandler')
+
+const commandHandler = require('./commandAbstract')
 var products = require('../Database/commandDB')
 
-class commandDemoQueryDB extends commandHandler {
+module.exports = class commandDemoQueryDB extends commandHandler {
   
     addProduct = (req,res)=>{
             products.push(req.body)
@@ -24,7 +24,3 @@ class commandDemoQueryDB extends commandHandler {
             res.json({mes: "Product deleted", data: products})
     }
 }
-
-const commandDemoQueryDBInjector = new commandDemoQueryDB (new demoQueryDB)
-
-module.exports = commandDemoQueryDBInjector
