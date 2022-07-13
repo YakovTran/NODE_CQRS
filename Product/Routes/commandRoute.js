@@ -4,9 +4,9 @@ const commandWithDemoDBInjector = require('../Handler/commandWithDemoDBInjector'
 const validatorByID = require('../Middleware/validatorByID')
 const validatorByName = require('../Middleware/validatorByName')
 const eventSourcing = require('../../EventSourcing/eventMiddleware')
-const demoQueryDB = require('../Database/queryDB')
 
-injector = new commandWithDemoDBInjector(demoQueryDB)
+
+injector = new commandWithDemoDBInjector
 const commandHandler = injector.getCommandHandler()
 
 router.post('/product',eventSourcing.addProductEvent, validatorByName, commandHandler.addProduct)
