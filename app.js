@@ -13,5 +13,6 @@ app.use(commandRoute)
 app.use(queryRoute)
 app.use(eventRoute)
 
-app.listen(3000)
+module.exports = app
+//app.listen(3000)
 

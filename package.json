@@ -1,1 +1,1 @@
-{"main":"app.js","scripts":{"start":"nodemon app.js"},"dependencies":{"axios":"^0.27.2","body-parser":"^1.19.1","express":"^4.17.2","nodemon":"^2.0.19"}}
+{"main":"app.js","scripts":{"start":"nodemon app.js","test": "jest"},"dependencies":{"axios":"^0.27.2","body-parser":"^1.19.1","express":"^4.17.2","jest":"^28.1.2","nodemon":"^2.0.19","supertest":"^6.2.4"}}
