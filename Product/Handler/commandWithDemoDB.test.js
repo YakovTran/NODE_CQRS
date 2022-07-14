@@ -4,6 +4,7 @@ const app = require('../../app')
 const request = supertest(app)
 const commandWithDemoDBInjector = require('./commandWithDemoDBInjector')
 const demoQueryDB = require('../Database/queryDB')
+
 jest.mock('../Database/queryDB')
 
 beforeEach(()=> {
@@ -12,7 +13,7 @@ beforeEach(()=> {
 
 describe ('POST / product', ()=> {
     describe('given body request', ()=> {
-        it('response code 200', async()=>{
+        /*it('response code 200', async()=>{
             const response = await request.post('/product').send({
                 name : "demo",
                 quantity : 10,
@@ -43,11 +44,26 @@ describe ('POST / product', ()=> {
                 price : 10
             })
             expect(response.body.data[0].id).toBeDefined()
-        })
-        it('mock queryDB', ()=>{
+        })*/
+        it('check method function of mocking queryDB', async ()=>{
             injector = new commandWithDemoDBInjector
-            injector.getCommandHandler()
+            const commandHandler = injector.getCommandHandler()
             expect(demoQueryDB).toHaveBeenCalledTimes(1)
+            const queryDBinstance = demoQueryDB.mock.instances[0]
+
+            const req = {
+                body : {
+                    name : "demo3",
+                    quantity : 10,
+                    price : 10,
+                }
+            }
+            const res = {
+                json(){}
+            }
+            commandHandler.addProduct(req,res)
+            const queryDBinstanceInsertProduct = queryDBinstance.insertProduct
+            expect(queryDBinstanceInsertProduct).toHaveBeenCalledTimes(1)
         })
     })
 })
