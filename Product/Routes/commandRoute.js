@@ -9,7 +9,7 @@ const eventSourcing = require('../../EventSourcing/eventMiddleware')
 injector = new commandWithDemoDBInjector
 const commandHandler = injector.getCommandHandler()
 
-router.post('/product',eventSourcing.addProductEvent, validatorByName, commandHandler.addProduct)
+router.post('/product', eventSourcing.addProductEvent, validatorByName, commandHandler.addProduct)
 router.patch('/product:id', eventSourcing.updateProductEvent, validatorByID, commandHandler.updateProduct)
 router.delete('/product:id', eventSourcing.deleteProductEvent, validatorByID, commandHandler.deleteProduct)
 

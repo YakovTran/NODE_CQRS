@@ -1,4 +1,11 @@
 var eventDB = require('./eventDB')
+const io = require('socket.io-client')
+const socket = io('http://localhost:3000')
+socket.emit('event')
+
+socket.on('mess', mess => {
+    console.log(mess)
+})
 
 exports.eventValidator = (req,res,next) => {
     const i = req.params.id
@@ -10,6 +17,7 @@ exports.eventValidator = (req,res,next) => {
 }
 
 exports.addProductEvent = (req,res,next) => {
+    //socket.emit("add-product", req.body)
     const event = {
             method: req.method,
             time: new Date(),

@@ -1,6 +1,12 @@
 
 const commandHandler = require('./commandAbstract')
 var products = require('../Database/commandDB')
+const io = require('socket.io-client')
+const socket = io('http://localhost:3000')
+socket.emit('commandHandler')
+socket.on('mess', mess => {
+        console.log(mess)
+    })
 
 module.exports = class commandDemoQueryDB extends commandHandler {
   
