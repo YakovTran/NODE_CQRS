@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const eventHandler = require('./eventHandler')
-const commandWithDemoDBInjector = require('../Product/Handler/commandWithDemoDBInjector')
 const validatorByID = require('../Product/Middleware/validatorByID')
 const validatorByName = require('../Product/Middleware/validatorByName')
 
