@@ -8,9 +8,11 @@ app.use(bodyParser.urlencoded({extended:false}));
 const commandRoute = require('./User/Routes/commandRoute');
 const queryRoute = require('./User/Routes/queryRoute');
 const eventRoute = require ('./User/Event/eventRoute')
+const transactionRoute = require('./Transaction/Route/transactionRoute')
 
 app.use(commandRoute)
 app.use(queryRoute)
 app.use(eventRoute)
+app.use(transactionRoute)
 
 module.exports = app

@@ -8,8 +8,11 @@ const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
 socket.emit('query')
 
-socket.on('saveUser', data => {
-    queryDemoDB.saveUser(data)
+socket.on('saveUser', msg => {
+    queryDemoDB.saveUser(msg)
+})
+socket.on('updateUserBalance', msg => {
+    queryDemoDB.updateBalance(msg)
 })
 
 router.get('/users', queryDemoDB.getAllUsers)

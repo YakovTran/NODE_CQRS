@@ -15,7 +15,7 @@ module.exports = class commandHandler {
                     city: req.body.city,
                     balance: req.body.balance
                 }
-        }    
+        }
         db.push(event)
         db[db.length - 1].id = db.length - 1
         socket.emit('saveUser', db[db.length-1].data)
@@ -49,5 +49,15 @@ module.exports = class commandHandler {
         db[db.length - 1].id = db.length - 1
         socket.emit('deleteUser', req.params.id)
             res.json({mes: "User deleted"})
+    }
+
+    static updateBalance (msg) {
+        const event = {
+            method: "Update Balance from Transaction",
+            time: new Date(),
+            data : msg
+        }
+        db.push(event)
+        db[db.length - 1].id = db.length - 1
     }
 }

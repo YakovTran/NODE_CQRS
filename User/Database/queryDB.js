@@ -10,4 +10,8 @@ module.exports = class demoQueryDB {
         var users = Array.from(userDB.values())
         return users
     }
+    updateBalance(msg){
+        userDB.get(msg.senderID).balance = parseFloat(userDB.get(msg.senderID).balance) - parseFloat(msg.amount)
+        userDB.get(msg.receiverID).balance = parseFloat(userDB.get(msg.receiverID).balance) + parseFloat(msg.amount)
+    }
 }

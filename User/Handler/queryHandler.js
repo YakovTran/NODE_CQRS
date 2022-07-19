@@ -14,4 +14,7 @@ module.exports = class queryDemoDB extends queryHandler {
         const user = users.find(e => e.userID == i)
         res.send(user)
     }
+    updateBalance (msg){
+        this.db.updateBalance(msg)
+    }
 }
