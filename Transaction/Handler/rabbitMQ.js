@@ -14,28 +14,15 @@ module.exports = (req, res, next) => {
         channel.assertExchange('testing','direct', {
           durable: false
         });
-
-        channel.assertQueue('', {exclusive: true},function(error2, q){
-            if(error2){
-                throw error2
-            }
-            channel.prefetch(1)
-            channel.bindQueue(q.queue,'testing','reply')
-            channel.consume(q.queue, function(msg){
-                console.log(msg.content.toString())
-            })
-            
-        })    
+    
         channel.publish('testing', 'main', Buffer.from(JSON.stringify(req.body)))
         
       });
-    
-      setTimeout(function() {
+      next()
+      /*setTimeout(function() {
         connection.close();
         process.exit(0)
-        }, 500);
+        }, 500);*/
     });
-    
-    next()
     
     }

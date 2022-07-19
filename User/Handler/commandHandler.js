@@ -19,7 +19,7 @@ module.exports = class commandHandler {
         db.push(event)
         db[db.length - 1].id = db.length - 1
         socket.emit('saveUser', db[db.length-1].data)
-        res.json({mes: "User created", data : req.body})
+        res.json({mes: "User created", data : db[db.length-1].data})
     }
 
     static updateUser = (req, res) => {
@@ -36,7 +36,7 @@ module.exports = class commandHandler {
         db.push(event)
         db[db.length - 1].id = db.length - 1
         socket.emit('saveUser', db[db.length-1].data)
-        res.json({mes: "User updated", data : req.body})
+        res.json({mes: "User updated", data : db[db.length-1].data})
     }
 
     static deleteUser = (req,res) => {

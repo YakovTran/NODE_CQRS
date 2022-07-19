@@ -37,8 +37,7 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     if (error1) {
       throw error1;
     }
-    
-
+  
     channel.assertExchange('testing','direct', {
       durable: false
     });
@@ -49,12 +48,9 @@ amqp.connect('amqp://localhost', function(error0, connection) {
         }
         channel.prefetch(1)
         channel.bindQueue(q.queue, 'testing','main')
-        
-
         channel.consume(q.queue, function(msg) {
             const r = JSON.parse(msg.content)
             console.log(r)
-            channel.publish('testing','reply', Buffer.from(msg.content.toString()))
         }, {
             noAck: true
         });

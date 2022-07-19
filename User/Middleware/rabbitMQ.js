@@ -16,15 +16,13 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     });
 
     channel.publish('testing', 'main', Buffer.from(JSON.stringify(req.body)))
-    
-  });
 
-  setTimeout(function() {
+  });
+  next()
+  /*setTimeout(function() {
     connection.close();
     process.exit(0)
-    }, 500);
+    }, 500);*/
 });
-
-next()
 
 }
