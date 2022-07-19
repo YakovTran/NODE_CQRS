@@ -1,7 +1,7 @@
 const db = require('../Database/commandEventDB')
 const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
-socket.emit('commandHandler')
+socket.emit('command')
 
 module.exports = class commandHandler {
   
@@ -10,15 +10,15 @@ module.exports = class commandHandler {
                 method: req.method,
                 time: new Date(),
                 data : {
-                    userID: req.id,
-                    name: req.name,
-                    city: req.city,
-                    balance: req.balance,
+                    userID: req.body.id,
+                    name: req.body.name,
+                    city: req.body.city,
+                    balance: req.body.balance
                 }
         }    
         db.push(event)
         db[db.length - 1].id = db.length - 1
-        socket.emit('createUser', db[db.length-1].data)
+        socket.emit('saveUser', db[db.length-1].data)
         res.json({mes: "User created", data : req.body})
     }
 
@@ -28,14 +28,14 @@ module.exports = class commandHandler {
             time: new Date(),
             data : {
                 userID: req.params.id,
-                name: req.name,
-                city: req.city,
-                balance: req.balance,
+                name: req.body.name,
+                city: req.body.city,
+                balance: req.body.balance
             }
         }
         db.push(event)
         db[db.length - 1].id = db.length - 1
-        socket.emit('updateUser', db[db.length-1].data)
+        socket.emit('saveUser', db[db.length-1].data)
         res.json({mes: "User updated", data : req.body})
     }
 

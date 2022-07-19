@@ -3,8 +3,7 @@ module.exports = class queryHandler {
     constructor(db){
         this.db = db
     }
-    insertUser(){}
-    updateUser(){}
+    saveUser(){}
     getUser(){}
     getAllUsers(){}
 }

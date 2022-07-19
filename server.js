@@ -13,6 +13,9 @@ io.on('connection', socket=>{
     socket.on('command', ()=>{
         socket.join('command')
     })
+    socket.on('saveUser', data =>{
+        io.to('query').emit('saveUser', data)
+    })
     
 })
 module.exports = io
