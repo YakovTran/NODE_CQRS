@@ -2,7 +2,7 @@
 const supertest = require('supertest')
 const app = require('../../app')
 const request = supertest(app)
-const commandWithDemoDBInjector = require('./commandWithDemoDBInjector')
+const queryHandlerDemoDBInjector = require('./queryDemoDBInjector')
 const demoQueryDB = require('../Database/queryDB')
 
 jest.mock('../Database/queryDB')
@@ -45,25 +45,22 @@ describe ('POST / product', ()=> {
             })
             expect(response.body.data[0].id).toBeDefined()
         })*/
-        it('check method function of mocking queryDB', async ()=>{
-            injector = new commandWithDemoDBInjector
-            const commandHandler = injector.getCommandHandler()
+        it('check method function of mocking queryDB', ()=>{
+            injector = new queryHandlerDemoDBInjector
+            const queryHandler = injector.getQueryHandler()
             expect(demoQueryDB).toHaveBeenCalledTimes(1)
             const queryDBinstance = demoQueryDB.mock.instances[0]
 
-            const req = {
-                body : {
-                    name : "demo3",
-                    quantity : 10,
-                    price : 10,
-                }
+            const data = {
+                userID: "test",
+                name: "test",
+                city: "test",
+                balance: 123
             }
-            const res = {
-                json(){}
-            }
-            commandHandler.addProduct(req,res)
-            const queryDBinstanceInsertProduct = queryDBinstance.insertProduct
-            expect(queryDBinstanceInsertProduct).toHaveBeenCalledTimes(1)
+        
+            queryHandler.saveUser(data)
+            const queryDBinstanceSaveUser = queryDBinstance.saveUser
+            expect(queryDBinstanceSaveUser).toHaveBeenCalledTimes(1)
         })
     })
 })
