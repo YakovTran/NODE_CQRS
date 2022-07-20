@@ -2,6 +2,7 @@ const db = require('../Database/commandEventDB')
 const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
 socket.emit('command')
+const amqp = require('amqplib/callback_api')
 
 module.exports = class commandHandler {
   
@@ -19,6 +20,26 @@ module.exports = class commandHandler {
         db.push(event)
         db[db.length - 1].id = db.length - 1
         socket.emit('saveUser', db[db.length-1].data)
+        
+
+        amqp.connect('amqp://localhost', function(error0, connection) {
+            if (error0) {
+                throw error0;
+            }
+            connection.createChannel(function(error1, channel) {
+                if (error1) {
+                throw error1;
+                }
+
+                channel.assertExchange('testing','direct', {
+                durable: false
+                });
+
+                channel.publish('testing', 'main', Buffer.from(JSON.stringify(db[db.length-1].data)))
+
+            });
+        })
+
         res.json({mes: "User created", data : db[db.length-1].data})
     }
 
