@@ -18,11 +18,10 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     channel.publish('testing', 'main', Buffer.from(JSON.stringify(req.body)))
 
   });
-  next()
-  /*setTimeout(function() {
+  
+  setTimeout(function() {
     connection.close();
-    process.exit(0)
-    }, 500);*/
+    }, 500);
 });
-
+next()
 }

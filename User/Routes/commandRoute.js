@@ -10,7 +10,9 @@ socket.on('updateUserBalance', msg => {
     commandHandler.updateBalance(msg)
 })
 
-router.post('/user', validateForCreate, commandHandler.createUser)
+const rabbitMQ = require('../Middleware/rabbitMQ')
+
+router.post('/user',rabbitMQ, validateForCreate, commandHandler.createUser)
 router.patch('/user:id', validateForUpdate, commandHandler.updateUser)
 router.delete('/user:id', validateForUpdate, commandHandler.deleteUser)
 
