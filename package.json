@@ -1,1 +1,1 @@
-{"main":"server.js","scripts":{"start":"nodemon server","test":"jest"},"dependencies":{"amqplib":"^0.10.0","body-parser":"^1.19.1","express":"^4.17.2","jest":"^28.1.2","nodemon":"^2.0.19","socket.io":"^4.5.1","socket.io-client":"^4.5.1","supertest":"^6.2.4"}}
+{"main":"server.js","scripts":{"start":"nodemon server","test":"jest"},"dependencies":{"amqplib":"^0.10.0","body-parser":"^1.19.1","dotenv":"^16.0.1","express":"^4.17.2","jest":"^28.1.2","nodemon":"^2.0.19","socket.io":"^4.5.1","socket.io-client":"^4.5.1","supertest":"^6.2.4"}}

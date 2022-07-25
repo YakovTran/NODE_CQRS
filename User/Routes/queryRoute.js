@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const injector = new queryHandlerInjector
 const queryDemoDB = injector.getQueryHandler()
+require('dotenv').config()
 
 const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
@@ -21,7 +22,7 @@ router.get('/user:id', queryDemoDB.getUser)
 
 const amqp = require('amqplib/callback_api')
 
-amqp.connect('amqp://localhost', function(error0, connection) {
+amqp.connect(`amqp://${process.env.AMQPHOST}`, function(error0, connection) {
   if (error0) {
     throw error0;
   }

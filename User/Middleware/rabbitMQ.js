@@ -1,8 +1,10 @@
+require('dotenv').config()
+
 module.exports = (req, res, next) => {
 
 const amqp = require('amqplib/callback_api')
 
-amqp.connect('amqp://localhost', function(error0, connection) {
+amqp.connect(`amqp://${process.env.AMQPHOST}`, function(error0, connection) {
   if (error0) {
     throw error0;
   }
